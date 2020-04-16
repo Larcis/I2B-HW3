@@ -11,8 +11,8 @@ my $total_lines = 0;
 my $length = 0;
 my $is_line_valid = 0;
 my $window_size = 0;
-#my @motif_start_indexes = (11, 3, 14, 6, 11, 1);
-my @motif_start_indexes = ();
+my @motif_start_indexes = (11, 3, 14, 6, 11, 1);
+#my @motif_start_indexes = ();
 my @motifs = ();
 my @dnas = ();
 while((my $line  = <INPUT>)){
@@ -34,7 +34,7 @@ while((my $line  = <INPUT>)){
         $is_line_valid = 1;
     }
     if($is_line_valid){
-        my $motif_start_idx = int(rand($length - $window_size + 1)); #$motif_start_indexes[$total_lines]; #
+        my $motif_start_idx = $motif_start_indexes[$total_lines]; #int(rand($length - $window_size + 1));
         #print "\nmotif starts $motif_start_idx \n";
         push @dnas, $line;
         push @motif_start_indexes, $motif_start_idx;
@@ -68,7 +68,6 @@ for(my $i = 0; $i < $total_lines; $i++){
     }
     print "\n";
 }
-
 
 my %freqs_in_motifs = (
     'A' => [],
@@ -117,21 +116,21 @@ for(my $i = 0; $i < 5 ; $i++){
 sub print_table {
     my ($name, $window_size, @table ) = @_;
     print "\nTABLE $name: \n";
-    for(my $k= 1; $k < (2+$window_size) * 12+1; $k++){
+    for(my $k= 1; $k < (2+$window_size) * 10+1; $k++){
         print "_";
     }
     print "\n";
     for(my $i = 0; $i < 5 ; $i++){ 
         for(my $j = 0; $j < $window_size + 2; $j++){
             if(looks_like_number($table[$i][$j]) && ($table[$i][$j] - int($table[$i][$j]))){
-                print sprintf("%.4f%6s", $table[$i][$j], "|");
+                print sprintf("%.2f%6s", $table[$i][$j], "|");
             } else {
-                print sprintf("%6s%6s", $table[$i][$j], "|");
+                print sprintf("%4s%6s", $table[$i][$j], "|");
             }
         } 
         print "\n";
-        for(my $k= 1; $k < (2+$window_size) * 12+1; $k++){
-            if($k % 12 == 0){
+        for(my $k= 1; $k < (2+$window_size) * 10+1; $k++){
+            if($k % 10 == 0){
                 print "|";
             } else {
                 print "_";
