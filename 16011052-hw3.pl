@@ -141,7 +141,7 @@ sub print_table {
     }
 }
 
-print_table("1",$window_size, @table_1);
+print_table("Total Counts",$window_size, @table_1);
 
 my @sums = [];
 for(my $i = 1; $i < $window_size + 2 ; $i++){ 
@@ -158,7 +158,7 @@ for(my $i = 1; $i < 5 ; $i++){
         $table_2[$i][$j] = $value / $sums[$j];
     } 
 }
-print_table("2",$window_size, @table_2);
+print_table("Frequencies",$window_size, @table_2);
 
 for(my $i = 1; $i < 5 ; $i++){ 
     for(my $j = 1; $j < $window_size + 2; $j++){
@@ -166,4 +166,4 @@ for(my $i = 1; $i < 5 ; $i++){
         $table_3[$i][$j] = ($value + 0.25) / ($sums[$j] + 1);
     } 
 }
-print_table("3",$window_size, @table_3);
+print_table("Pseudocounts",$window_size, @table_3);
